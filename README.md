@@ -1,8 +1,8 @@
 # Laporan Proyek Machine Learning - Sistem Rekomendasi Film
 
-**Nama:** [Nama Anda]  
-**Email:** [Email Anda]  
-**Tanggal:** [Tanggal]
+**Nama:** Muhammad Fery Syahputra  
+**Email:** a009ybm322@devacademy.id  
+**ID Dicoding:** a009ybm322
 
 ---
 
