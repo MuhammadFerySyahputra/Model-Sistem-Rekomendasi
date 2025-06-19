@@ -384,11 +384,11 @@ model_knn = KNNBasic(k=40, sim_options={'user_based': True, 'name': 'cosine'})
 
 | Rank | Title | Genres | Similarity Score |
 |------|-------|--------|------------------|
-| 1 | A Bug's Life (1998) | Adventure\|Animation\|Children\|Comedy | 0.845 |
-| 2 | Monsters, Inc. (2001) | Adventure\|Animation\|Children\|Comedy | 0.823 |
-| 3 | Shrek (2001) | Adventure\|Animation\|Children\|Comedy | 0.798 |
-| 4 | Finding Nemo (2003) | Adventure\|Animation\|Children | 0.776 |
-| 5 | The Incredibles (2004) | Action\|Adventure\|Animation\|Children | 0.754 |
+| 1 | Toy Story 2 (1999) | Adventure\|Animation\|Children\|Comedy\|Fantasy  | 1.000000 |
+| 2 | Toy Story 3 (2010) | Adventure\|Animation\|Children\|Comedy\|Fantasy\|IMAX  | 0.803326 |
+| 3 | Antz (1998) | Adventure\|Animation\|Children\|Comedy\|Fantas  | 0.582379 |
+| 4 | Moana (2016) | Adventure\|Animation\|Children\|Comedy\|Fantas  | 0.582379 |
+| 5 | Presto (2008) | Animation\|Children\|Comedy\|Fantasy  | 0.511292 |
 
 **Analisis**: Sistem berhasil merekomendasikan film animasi dengan genre serupa, menunjukkan efektivitas content-based approach.
 
@@ -397,19 +397,40 @@ model_knn = KNNBasic(k=40, sim_options={'user_based': True, 'name': 'cosine'})
 **Input User**: User ID 1
 
 **User's High-Rated Movies**:
-- Toy Story (1995) - Rating: 4.0
-- GoldenEye (1995) - Rating: 5.0
-- Four Weddings and a Funeral (1994) - Rating: 5.0
+|Title | Genres | rating |
+|------|-------|--------|
+|Toy Story 2 (1999) |  Comedy\|Drama\|War  | 5.0 |
+|Who Framed Roger Rabbit? (1988) |  Adventure\|Animation\|Children\|Comedy\|Crime\|Fantasy\|Mystery  \| 5.0 |
+|Spaceballs (1987) |  Comedy|Sci-Fi  | 5.0 |
 
 **SVD Recommendations**:
 
 | Rank | Title | Predicted Rating |
 |------|-------|------------------|
-| 1 | Shawshank Redemption, The (1994) | 4.73 |
-| 2 | Forrest Gump (1994) | 4.68 |
-| 3 | Pulp Fiction (1994) | 4.55 |
-| 4 | Silence of the Lambs, The (1991) | 4.51 |
-| 5 | Star Wars: Episode IV - A New Hope (1977) | 4.47 |
+| 1 | Blade Runner (1982) | 5 |
+| 2 | Ghost in the Shell (Kôkaku kidôtai) (1995) | 5 |
+| 3 | Dr. Strangelove or: How I Learned to Stop Worrying and Love the Bomb (1964) | 5 |
+| 4 | North by Northwest (1959) | 5 |
+| 5 | Casablanca (1942) | 5 |
+
+#### HYBRID RECOMMENDATIONS
+**User**: User ID 10
+**Film-film yang disukai user**:
+|Title | rating |
+|------|--------|
+|Seven (a.k.a. Se7en) (1995) | 5.0 |
+|Usual Suspects, The (1995)  | 5.0 |
+|Bottle Rocket (1996) | 5.0 |
+
+**SVD Recommendations**:
+
+| Rank | Title | Predicted Rating |
+|------|-------|------------------|
+| 1 | Blade Runner (1982) | 5 |
+| 2 | Ghost in the Shell (Kôkaku kidôtai) (1995) | 5 |
+| 3 | Dr. Strangelove or: How I Learned to Stop Worrying and Love the Bomb (1964) | 5 |
+| 4 | North by Northwest (1959) | 5 |
+| 5 | Casablanca (1942) | 5 |
 
 ### Kelebihan dan Kekurangan Pendekatan
 
@@ -455,13 +476,6 @@ model_knn = KNNBasic(k=40, sim_options={'user_based': True, 'name': 'cosine'})
 3. **Sparsity Problem**: Performa menurun drastis pada sparse data
 4. **Neighborhood Selection**: Sensitif terhadap pemilihan K dan similarity metric
 
-### Model Performance Summary
-
-| Model | RMSE | MAE | Training Time | Inference Time |
-|-------|------|-----|---------------|----------------|
-| Content-Based | N/A | N/A | 2.3s | 0.01s |
-| SVD | 0.8734 | 0.6726 | 15.2s | 0.02s |
-| KNN | 0.9156 | 0.7043 | 45.6s | 1.2s |
 
 **Best Performing Model**: SVD dengan RMSE terbaik dan balance antara accuracy dan efficiency.
 
