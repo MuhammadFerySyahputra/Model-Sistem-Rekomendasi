@@ -23,9 +23,9 @@ Proyek ini penting karena:
 
 ### Referensi Penelitian
 
-- Ricci, F., Rokach, L., & Shapira, B. (2015). *Recommender Systems Handbook*. Springer.
-- Koren, Y., Bell, R., & Volinsky, C. (2009). Matrix factorization techniques for recommender systems. *Computer*, 42(8), 30-37.
-- Su, X., & Khoshgoftaar, T. M. (2009). A survey of collaborative filtering techniques. *Advances in artificial intelligence*, 2009.
+- Ricci, F., Rokach, L., & Shapira, B. (2015). _Recommender Systems Handbook_. Springer.
+- Koren, Y., Bell, R., & Volinsky, C. (2009). Matrix factorization techniques for recommender systems. _Computer_, 42(8), 30-37.
+- Su, X., & Khoshgoftaar, T. M. (2009). A survey of collaborative filtering techniques. _Advances in artificial intelligence_, 2009.
 
 ---
 
@@ -50,14 +50,16 @@ Proyek ini penting karena:
 Untuk mencapai goals yang telah ditetapkan, proyek ini akan mengimplementasikan dua pendekatan utama sistem rekomendasi:
 
 #### 1. Content-Based Filtering
+
 - **Prinsip**: Merekomendasikan item berdasarkan kesamaan karakteristik atau fitur item
-- **Keunggulan**: 
+- **Keunggulan**:
   - Tidak memerlukan data dari pengguna lain
   - Dapat mengatasi cold start problem untuk item baru
   - Memberikan rekomendasi yang dapat dijelaskan (explainable)
 - **Implementasi**: Menggunakan TF-IDF vectorization dan cosine similarity untuk menghitung kesamaan antar film berdasarkan genre, judul, dan metadata lainnya
 
 #### 2. Collaborative Filtering
+
 - **Prinsip**: Merekomendasikan item berdasarkan preferensi pengguna lain yang memiliki pola rating serupa
 - **Keunggulan**:
   - Dapat menemukan pola tersembunyi dalam preferensi pengguna
@@ -66,6 +68,7 @@ Untuk mencapai goals yang telah ditetapkan, proyek ini akan mengimplementasikan 
 - **Implementasi**: Menggunakan Matrix Factorization (SVD) dan Memory-based (KNN) untuk prediksi rating
 
 #### 3. Hybrid Approach
+
 Kombinasi kedua pendekatan untuk mendapatkan hasil yang optimal dan mengatasi kelemahan masing-masing metode.
 
 ---
@@ -90,13 +93,15 @@ Dataset yang digunakan dalam proyek ini adalah **MovieLens Latest Small Dataset*
 ### Deskripsi File dan Variabel
 
 #### 1. movies.csv
-| Variabel | Deskripsi | Tipe Data |
-|----------|-----------|-----------|
-| movieId | ID unik untuk setiap film | int64 |
-| title | Judul film beserta tahun rilis | object |
-| genres | Genre film (dipisahkan dengan " ") | object |
 
-**Contoh**: 
+| Variabel | Deskripsi                          | Tipe Data |
+| -------- | ---------------------------------- | --------- |
+| movieId  | ID unik untuk setiap film          | int64     |
+| title    | Judul film beserta tahun rilis     | object    |
+| genres   | Genre film (dipisahkan dengan " ") | object    |
+
+**Contoh**:
+
 ```
 movieId: 1
 title: Toy Story (1995)
@@ -104,30 +109,35 @@ genres: Adventure|Animation|Children|Comedy|Fantasy
 ```
 
 #### 2. ratings.csv
-| Variabel | Deskripsi | Tipe Data |
-|----------|-----------|-----------|
-| userId | ID unik untuk setiap pengguna | int64 |
-| movieId | ID film yang dirating | int64 |
-| rating | Rating yang diberikan (0.5-5.0) | float64 |
-| timestamp | Waktu pemberian rating (Unix timestamp) | int64 |
+
+| Variabel  | Deskripsi                               | Tipe Data |
+| --------- | --------------------------------------- | --------- |
+| userId    | ID unik untuk setiap pengguna           | int64     |
+| movieId   | ID film yang dirating                   | int64     |
+| rating    | Rating yang diberikan (0.5-5.0)         | float64   |
+| timestamp | Waktu pemberian rating (Unix timestamp) | int64     |
 
 #### 3. tags.csv
-| Variabel | Deskripsi | Tipe Data |
-|----------|-----------|-----------|
-| userId | ID pengguna yang memberikan tag | int64 |
-| movieId | ID film yang diberi tag | int64 |
-| tag | Tag/label yang diberikan | object |
-| timestamp | Waktu pemberian tag | int64 |
+
+| Variabel  | Deskripsi                       | Tipe Data |
+| --------- | ------------------------------- | --------- |
+| userId    | ID pengguna yang memberikan tag | int64     |
+| movieId   | ID film yang diberi tag         | int64     |
+| tag       | Tag/label yang diberikan        | object    |
+| timestamp | Waktu pemberian tag             | int64     |
 
 ### Exploratory Data Analysis (EDA)
 
 #### 1. Distribusi Rating
+
 - **Mean Rating**: 3.5/5.0
 - **Distribusi**: Rating 4.0 dan 3.0 paling banyak diberikan
 - **Insight**: Pengguna cenderung memberikan rating positif (>3.0) lebih sering
 
 #### 2. Distribusi Genre
+
 Top 5 genre paling populer:
+
 1. **Drama**: 25.2% dari total film
 2. **Comedy**: 16.8%
 3. **Action**: 12.1%
@@ -135,16 +145,19 @@ Top 5 genre paling populer:
 5. **Adventure**: 9.8%
 
 #### 3. Aktivitas Pengguna
+
 - **Rating per User**: Rata-rata 165 rating per pengguna
 - **Range**: 20 - 2,698 rating per pengguna
 - **Power Users**: 10% pengguna memberikan 50% dari total rating
 
 #### 4. Popularitas Film
+
 - **Rating per Movie**: Rata-rata 10.4 rating per film
 - **Most Rated**: "Forrest Gump (1994)" dengan 329 rating
 - **Long Tail Distribution**: Mayoritas film memiliki sedikit rating
 
 #### 5. Temporal Analysis
+
 - **Peak Activity**: 2000-2005 periode rating tertinggi
 - **Trend**: Aktivitas rating menurun setelah 2010
 - **Seasonal Pattern**: Tidak ada pola musiman yang signifikan
@@ -152,12 +165,14 @@ Top 5 genre paling populer:
 ### Data Quality Assessment
 
 #### Kelebihan Dataset:
+
 - **Real User Data**: Data asli dari pengguna MovieLens
 - **Rich Metadata**: Informasi genre yang lengkap
 - **Temporal Information**: Timestamp untuk analisis trends
 - **Balanced Scale**: Rating scale yang seimbang
 
 #### Limitasi Dataset:
+
 - **High Sparsity**: 98.3% data kosong dalam user-item matrix
 - **Popularity Bias**: Film populer mendapat lebih banyak rating
 - **Demographics**: Tidak ada informasi demografis pengguna
@@ -170,6 +185,7 @@ Top 5 genre paling populer:
 ### Teknik Data Preparation yang Diterapkan
 
 #### 1. Data Loading dan Initial Cleaning
+
 ```python
 # Load datasets
 movies_df = pd.read_csv('ml-latest-small/movies.csv')
@@ -180,6 +196,7 @@ tags_df = pd.read_csv('ml-latest-small/tags.csv')
 **Alasan**: Memuat data dari file CSV dan melakukan initial inspection untuk memahami struktur data.
 
 #### 2. Column Renaming dan Standardization
+
 ```python
 # Standardize column names
 movies_df = movies_df.rename(columns={'movieId': 'movie_id'})
@@ -191,6 +208,7 @@ ratings_df = ratings_df.rename(columns={'movieId': 'movie_id', 'userId': 'user_i
 #### 3. Feature Engineering untuk Movies
 
 ##### a. Year Extraction
+
 ```python
 # Extract year from title
 movies_df['year'] = movies_df['title'].str.extract(r'\((\d{4})\)').astype(float)
@@ -200,6 +218,7 @@ movies_df['title_clean'] = movies_df['title'].str.replace(r'\s*\(\d{4}\)', '', r
 **Alasan**: Memisahkan tahun dari judul untuk analisis temporal dan clean title untuk content-based filtering.
 
 ##### b. Genre Processing
+
 ```python
 # Split genres into list
 movies_df['genre_list'] = movies_df['genres'].str.split('|')
@@ -211,6 +230,7 @@ movies_df['main_genre'] = movies_df['genre_list'].apply(
 **Alasan**: Memproses genre untuk analisis dan feature engineering. Main genre digunakan untuk kategorisasi utama.
 
 ##### c. Content Feature Creation
+
 ```python
 # Create content description for content-based filtering
 movies_df['content'] = movies_df['genres'].fillna('') + ' ' + movies_df['title_clean'].fillna('')
@@ -221,6 +241,7 @@ movies_df['content'] = movies_df['genres'].fillna('') + ' ' + movies_df['title_c
 #### 4. Data Quality Checks
 
 ##### a. Missing Values Handling
+
 ```python
 # Check and handle missing values
 print("Missing values in movies:", movies_df.isnull().sum())
@@ -230,6 +251,7 @@ print("Missing values in ratings:", ratings_df.isnull().sum())
 **Alasan**: Memastikan data quality dan menangani missing values yang dapat mempengaruhi performa model.
 
 ##### b. Duplicate Removal
+
 ```python
 # Remove duplicate ratings (same user-movie combination)
 ratings_df = ratings_df.drop_duplicates(subset=['user_id', 'movie_id'])
@@ -240,6 +262,7 @@ ratings_df = ratings_df.drop_duplicates(subset=['user_id', 'movie_id'])
 #### 5. Data Filtering dan Sampling
 
 ##### a. Minimum Rating Threshold
+
 ```python
 # Filter users and movies with minimum interactions
 min_ratings_per_user = 20
@@ -255,6 +278,7 @@ popular_movies = movie_counts[movie_counts >= min_ratings_per_movie].index
 **Alasan**: Mengurangi sparsity dan noise dengan memfilter user/item yang memiliki interaksi minimal, meningkatkan kualitas rekomendasi.
 
 #### 6. Train-Test Split Preparation
+
 ```python
 # Prepare data for Surprise library
 reader = Reader(rating_scale=(0.5, 5.0))
@@ -268,17 +292,20 @@ trainset, testset = train_test_split(data, test_size=0.2, random_state=42)
 
 #### Mengapa Tahapan ini Diperlukan?
 
-1. **Feature Engineering**: 
+1. **Feature Engineering**:
+
    - Year extraction memungkinkan analisis trend temporal
    - Genre processing memungkinkan content-based filtering
    - Content feature creation essential untuk TF-IDF
 
 2. **Data Quality**:
+
    - Missing value handling mencegah error dalam training
    - Duplicate removal mencegah bias dalam model
    - Data type conversion memastikan kompatibilitas
 
 3. **Sparsity Reduction**:
+
    - Filtering minimum interactions mengurangi sparsity dari 98.3% menjadi ~95%
    - Meningkatkan signal-to-noise ratio dalam data
 
@@ -290,12 +317,14 @@ trainset, testset = train_test_split(data, test_size=0.2, random_state=42)
 ### Impact of Data Preparation
 
 **Before Preparation**:
+
 - Raw CSV files dengan format heterogen
 - High sparsity (98.3%)
 - Mixed data types dan missing values
 - Genre dalam format string concatenated
 
 **After Preparation**:
+
 - Clean, structured data dengan consistent naming
 - Reduced sparsity (~95%)
 - Proper data types untuk setiap feature
@@ -315,11 +344,13 @@ Proyek ini mengimplementasikan dua pendekatan utama sistem rekomendasi dengan to
 **Algoritma**: TF-IDF Vectorization + Cosine Similarity
 
 **Prinsip Kerja**:
+
 - Membuat representasi vektor untuk setiap film berdasarkan fitur content (genre + title)
 - Menghitung similarity matrix menggunakan cosine similarity
 - Merekomendasikan film dengan similarity score tertinggi
 
 **Implementasi**:
+
 ```python
 class ContentBasedRecommender:
     def build_content_features(self):
@@ -329,6 +360,7 @@ class ContentBasedRecommender:
 ```
 
 **Parameter Tuning**:
+
 - `max_features=5000`: Optimal balance antara feature richness dan computational efficiency
 - `ngram_range=(1, 2)`: Menangkap both single words dan word pairs
 - `stop_words='english'`: Menghilangkan common words yang tidak informatif
@@ -340,17 +372,20 @@ class ContentBasedRecommender:
 **Algoritma**: Matrix Factorization using SVD
 
 **Prinsip Kerja**:
+
 - Dekomposisi user-item rating matrix menjadi lower-dimensional matrices
 - Menangkap latent factors yang merepresentasikan preferensi user dan karakteristik item
 - Prediksi rating berdasarkan dot product dari user dan item factors
 
 **Implementasi**:
+
 ```python
 from surprise import SVD
 model_svd = SVD(n_factors=100, n_epochs=20, lr_all=0.005, reg_all=0.02)
 ```
 
 **Parameter Tuning**:
+
 - `n_factors=100`: Jumlah latent factors optimal berdasarkan cross-validation
 - `n_epochs=20`: Sufficient untuk convergence tanpa overfitting
 - `lr_all=0.005`: Learning rate yang stable
@@ -361,17 +396,20 @@ model_svd = SVD(n_factors=100, n_epochs=20, lr_all=0.005, reg_all=0.02)
 **Algoritma**: Memory-based Collaborative Filtering
 
 **Prinsip Kerja**:
+
 - Menemukan user/item yang paling mirip berdasarkan rating patterns
 - Prediksi rating berdasarkan weighted average dari neighbors
 - User-based approach: mencari user dengan preferensi serupa
 
 **Implementasi**:
+
 ```python
 from surprise import KNNBasic
 model_knn = KNNBasic(k=40, sim_options={'user_based': True, 'name': 'cosine'})
 ```
 
 **Parameter Tuning**:
+
 - `k=40`: Optimal number of neighbors
 - `user_based=True`: User-based approach more effective untuk dataset ini
 - `similarity='cosine'`: Cosine similarity optimal untuk sparse data
@@ -382,13 +420,13 @@ model_knn = KNNBasic(k=40, sim_options={'user_based': True, 'name': 'cosine'})
 
 **Input**: "Toy Story (1995)"
 
-| Rank | Title | Genres | Similarity Score |
-|------|-------|--------|------------------|
-| 1 | Toy Story 2 (1999) | Adventure\|Animation\|Children\|Comedy\|Fantasy  | 1.000000 |
-| 2 | Toy Story 3 (2010) | Adventure\|Animation\|Children\|Comedy\|Fantasy\|IMAX  | 0.803326 |
-| 3 | Antz (1998) | Adventure\|Animation\|Children\|Comedy\|Fantas  | 0.582379 |
-| 4 | Moana (2016) | Adventure\|Animation\|Children\|Comedy\|Fantas  | 0.582379 |
-| 5 | Presto (2008) | Animation\|Children\|Comedy\|Fantasy  | 0.511292 |
+| Rank | Title              | Genres                                                | Similarity Score |
+| ---- | ------------------ | ----------------------------------------------------- | ---------------- |
+| 1    | Toy Story 2 (1999) | Adventure\|Animation\|Children\|Comedy\|Fantasy       | 1.000000         |
+| 2    | Toy Story 3 (2010) | Adventure\|Animation\|Children\|Comedy\|Fantasy\|IMAX | 0.803326         |
+| 3    | Antz (1998)        | Adventure\|Animation\|Children\|Comedy\|Fantas        | 0.582379         |
+| 4    | Moana (2016)       | Adventure\|Animation\|Children\|Comedy\|Fantas        | 0.582379         |
+| 5    | Presto (2008)      | Animation\|Children\|Comedy\|Fantasy                  | 0.511292         |
 
 **Analisis**: Sistem berhasil merekomendasikan film animasi dengan genre serupa, menunjukkan efektivitas content-based approach.
 
@@ -399,50 +437,53 @@ model_knn = KNNBasic(k=40, sim_options={'user_based': True, 'name': 'cosine'})
 **User's High-Rated Movies**:
 |Title | Genres | rating |
 |------|-------|--------|
-|Toy Story 2 (1999) |  Comedy\|Drama\|War  | 5.0 |
-|Who Framed Roger Rabbit? (1988) |  Adventure\|Animation\|Children\|Comedy\|Crime\|Fantasy\|Mystery  \| 5.0 |
-|Spaceballs (1987) |  Comedy|Sci-Fi  | 5.0 |
+|Toy Story 2 (1999) | Comedy\|Drama\|War | 5.0 |
+|Who Framed Roger Rabbit? (1988) | Adventure\|Animation\|Children\|Comedy\|Crime\|Fantasy\|Mystery \| 5.0 |
+|Spaceballs (1987) | Comedy|Sci-Fi | 5.0 |
 
 **SVD Recommendations**:
 
-| Rank | Title | Predicted Rating |
-|------|-------|------------------|
-| 1 | Blade Runner (1982) | 5 |
-| 2 | Ghost in the Shell (Kôkaku kidôtai) (1995) | 5 |
-| 3 | Dr. Strangelove or: How I Learned to Stop Worrying and Love the Bomb (1964) | 5 |
-| 4 | North by Northwest (1959) | 5 |
-| 5 | Casablanca (1942) | 5 |
+| Rank | Title                                                                       | Predicted Rating |
+| ---- | --------------------------------------------------------------------------- | ---------------- |
+| 1    | Blade Runner (1982)                                                         | 5                |
+| 2    | Ghost in the Shell (Kôkaku kidôtai) (1995)                                  | 5                |
+| 3    | Dr. Strangelove or: How I Learned to Stop Worrying and Love the Bomb (1964) | 5                |
+| 4    | North by Northwest (1959)                                                   | 5                |
+| 5    | Casablanca (1942)                                                           | 5                |
 
 #### HYBRID RECOMMENDATIONS
+
 **User**: User ID 10
 **Film-film yang disukai user**:
 |Title | rating |
 |------|--------|
 |Seven (a.k.a. Se7en) (1995) | 5.0 |
-|Usual Suspects, The (1995)  | 5.0 |
+|Usual Suspects, The (1995) | 5.0 |
 |Bottle Rocket (1996) | 5.0 |
 
 **SVD Recommendations**:
 
-| Rank | Title | Predicted Rating |
-|------|-------|------------------|
-| 1 | Blade Runner (1982) | 5 |
-| 2 | Ghost in the Shell (Kôkaku kidôtai) (1995) | 5 |
-| 3 | Dr. Strangelove or: How I Learned to Stop Worrying and Love the Bomb (1964) | 5 |
-| 4 | North by Northwest (1959) | 5 |
-| 5 | Casablanca (1942) | 5 |
+| Rank | Title                                                                       | Predicted Rating |
+| ---- | --------------------------------------------------------------------------- | ---------------- |
+| 1    | Blade Runner (1982)                                                         | 5                |
+| 2    | Ghost in the Shell (Kôkaku kidôtai) (1995)                                  | 5                |
+| 3    | Dr. Strangelove or: How I Learned to Stop Worrying and Love the Bomb (1964) | 5                |
+| 4    | North by Northwest (1959)                                                   | 5                |
+| 5    | Casablanca (1942)                                                           | 5                |
 
 ### Kelebihan dan Kekurangan Pendekatan
 
 #### Content-Based Filtering
 
 **Kelebihan**:
+
 1. **No Cold Start untuk Items**: Dapat merekomendasikan film baru tanpa rating
 2. **Explainable**: Rekomendasi dapat dijelaskan berdasarkan feature similarity
 3. **User Independence**: Tidak memerlukan data user lain
 4. **Diversity Control**: Dapat mengontrol diversity dengan mengatur similarity threshold
 
 **Kekurangan**:
+
 1. **Limited Serendipity**: Rekomendasi cenderung predictable dan similar
 2. **Feature Engineering Dependent**: Kualitas bergantung pada feature yang digunakan
 3. **Over-specialization**: Cenderung merekomendasikan item yang terlalu mirip
@@ -451,12 +492,14 @@ model_knn = KNNBasic(k=40, sim_options={'user_based': True, 'name': 'cosine'})
 #### Collaborative Filtering - SVD
 
 **Kelebihan**:
+
 1. **Latent Factor Discovery**: Menemukan pola tersembunyi dalam preferensi
 2. **High Accuracy**: Performa prediksi yang superior untuk known users
 3. **Computational Efficiency**: Scalable untuk large datasets
 4. **Serendipity**: Dapat merekomendasikan unexpected items
 
 **Kekurangan**:
+
 1. **Cold Start Problem**: Tidak dapat handle user/item baru
 2. **Sparsity Sensitivity**: Performa menurun pada data yang sangat sparse
 3. **Black Box**: Sulit menginterpretasi mengapa item direkomendasikan
@@ -465,17 +508,18 @@ model_knn = KNNBasic(k=40, sim_options={'user_based': True, 'name': 'cosine'})
 #### Collaborative Filtering - KNN
 
 **Kelebihan**:
+
 1. **Interpretability**: Rekomendasi dapat dijelaskan berdasarkan similar users
 2. **No Training Required**: Lazy learning approach, fast to deploy
 3. **Local Patterns**: Baik untuk menangkap local preferences
 4. **Robust to Outliers**: Tidak terpengaruh single user yang extreme
 
 **Kekurangan**:
+
 1. **Computational Cost**: Expensive untuk inference pada large datasets
 2. **Memory Requirements**: Harus store seluruh user-item matrix
 3. **Sparsity Problem**: Performa menurun drastis pada sparse data
 4. **Neighborhood Selection**: Sensitif terhadap pemilihan K dan similarity metric
-
 
 **Best Performing Model**: SVD dengan RMSE terbaik dan balance antara accuracy dan efficiency.
 
@@ -488,25 +532,29 @@ model_knn = KNNBasic(k=40, sim_options={'user_based': True, 'name': 'cosine'})
 #### 1. Root Mean Square Error (RMSE)
 
 **Formula**:
+
 ```
 RMSE = √(Σ(rᵢ - r̂ᵢ)² / n)
 ```
 
 Dimana:
+
 - `rᵢ` = actual rating
-- `r̂ᵢ` = predicted rating  
+- `r̂ᵢ` = predicted rating
 - `n` = jumlah predictions
 
 **Cara Kerja**:
 RMSE mengukur rata-rata error antara predicted rating dan actual rating. Nilai yang lebih rendah menunjukkan performa yang lebih baik. RMSE memberikan penalty yang lebih besar untuk error yang besar karena menggunakan squared error.
 
 **Interpretasi**:
-- RMSE = 0.8734 (SVD) berarti rata-rata prediction error adalah 0.87 poin dalam skala 0.5-5.0
+
+- RMSE = 0.8807 (SVD) berarti rata-rata prediction error adalah 0.88 poin dalam skala 0.5-5.0
 - Dengan rating scale 4.5, error rate sekitar 19.4%
 
 #### 2. Mean Absolute Error (MAE)
 
 **Formula**:
+
 ```
 MAE = Σ|rᵢ - r̂ᵢ| / n
 ```
@@ -515,24 +563,22 @@ MAE = Σ|rᵢ - r̂ᵢ| / n
 MAE mengukur rata-rata absolute error tanpa squaring, sehingga lebih robust terhadap outliers. MAE memberikan interpretasi yang lebih direct tentang typical prediction error.
 
 **Interpretasi**:
-- MAE = 0.6726 (SVD) berarti rata-rata absolute error adalah 0.67 poin
+
+- MAE = 0.6766 (SVD) berarti rata-rata absolute error adalah 0.67 poin
 - Lebih rendah dari RMSE, menunjukkan distribusi error yang relatively normal
 
 #### 3. Content-Based Evaluation Metrics
 
-Untuk content-based filtering, evaluasi dilakukan secara qualitative:
+Untuk content-based filtering, evaluasi dilakukan secara qualitative:``
 
-##### a. Precision@K
-```
-Precision@K = (Relevant Items in Top-K) / K
-```
+##### a. Diversity Score
 
-##### b. Diversity Score
 ```
 Diversity = 1 - (Σ similarity(itemᵢ, itemⱼ)) / (K × (K-1)/2)
 ```
 
-##### c. Coverage
+##### b. Coverage
+
 ```
 Coverage = (Unique Items Recommended) / (Total Items Available)
 ```
@@ -542,16 +588,14 @@ Coverage = (Unique Items Recommended) / (Total Items Available)
 #### Collaborative Filtering Results
 
 **SVD Model Performance**:
-- **RMSE**: 0.8734
-- **MAE**: 0.6726
-- **Training Time**: 15.2 seconds
-- **Memory Usage**: 45MB
+
+- **RMSE**: 0.8807
+- **MAE**: 0.6766
 
 **KNN Model Performance**:
-- **RMSE**: 0.9156 (+4.8% vs SVD)
-- **MAE**: 0.7043 (+4.7% vs SVD)  
-- **Training Time**: 45.6 seconds
-- **Memory Usage**: 180MB
+
+- **RMSE**: 0.9561 (+4.8% vs SVD)
+- **MAE**: 0.7325 (+4.7% vs SVD)
 
 **Statistical Significance**:
 Paired t-test menunjukkan perbedaan performa antara SVD dan KNN secara statistik signifikan (p < 0.001).
@@ -560,11 +604,13 @@ Paired t-test menunjukkan perbedaan performa antara SVD dan KNN secara statistik
 
 **Qualitative Analysis**:
 
-1. **Recommendation Relevance**: 
+1. **Recommendation Relevance**:
+
    - 85% rekomendasi memiliki genre overlap dengan input movie
    - 92% rekomendasi berada dalam similar time period (±5 years)
 
 2. **Diversity Analysis**:
+
    - Average intra-list diversity: 0.73 (0-1 scale)
    - Genre diversity: 2.3 unique genres per recommendation list
    - Temporal diversity: 12.4 years average span
@@ -577,20 +623,21 @@ Paired t-test menunjukkan perbedaan performa antara SVD dan KNN secara statistik
 
 #### Model Comparison Summary
 
-| Aspect | Content-Based | SVD | KNN |
-|--------|---------------|-----|-----|
-| **Accuracy** | N/A (qualitative) | 0.8734 RMSE | 0.9156 RMSE |
-| **Cold Start** | ✅ Excellent | ❌ Poor | ❌ Poor |
-| **Scalability** | ✅ Good | ✅ Excellent | ❌ Poor |
-| **Interpretability** | ✅ High | ❌ Low | ✅ Medium |
-| **Diversity** | ⚠️ Medium | ✅ High | ⚠️ Medium |
-| **Serendipity** | ❌ Low | ✅ High | ⚠️ Medium |
+| Aspect               | Content-Based     | SVD          | KNN         |
+| -------------------- | ----------------- | ------------ | ----------- |
+| **Accuracy**         | N/A (qualitative) | 0.8807 RMSE  | 0.9561 RMSE |
+| **Cold Start**       | ✅ Excellent      | ❌ Poor      | ❌ Poor     |
+| **Scalability**      | ✅ Good           | ✅ Excellent | ❌ Poor     |
+| **Interpretability** | ✅ High           | ❌ Low       | ✅ Medium   |
+| **Diversity**        | ⚠️ Medium         | ✅ High      | ⚠️ Medium   |
+| **Serendipity**      | ❌ Low            | ✅ High      | ⚠️ Medium   |
 
 #### Business Impact Metrics
 
 **Potential Business Value**:
+
 1. **User Engagement**: Estimated 23% increase in session duration
-2. **Discovery Rate**: 34% improvement in long-tail item discovery  
+2. **Discovery Rate**: 34% improvement in long-tail item discovery
 3. **User Satisfaction**: Projected 18% increase based on rating prediction accuracy
 4. **Retention**: Expected 12% improvement in 30-day retention rate
 
@@ -598,13 +645,15 @@ Paired t-test menunjukkan perbedaan performa antara SVD dan KNN secara statistik
 
 #### What the Metrics Tell Us
 
-1. **SVD Superior Performance**: 
-   - RMSE 0.8734 menunjukkan prediksi rating yang akurat
-   - MAE 0.6726 berarti typical error hanya 0.67 poin
+1. **SVD Superior Performance**:
+
+   - RMSE 0.8807 menunjukkan prediksi rating yang akurat
+   - MAE 0.6766 berarti typical error hanya 0.67 poin
    - Error rate 19.4% acceptable untuk sistem rekomendasi
 
 2. **KNN Limitations**:
-   - Higher RMSE (0.9156) menunjukkan prediksi kurang akurat
+
+   - Higher RMSE (0.9561) menunjukkan prediksi kurang akurat
    - Computational overhead significantly higher
    - Memory requirements 4x lebih besar dari SVD
 
@@ -616,16 +665,19 @@ Paired t-test menunjukkan perbedaan performa antara SVD dan KNN secara statistik
 #### Model Selection Recommendation
 
 **Primary Model**: **SVD** untuk main recommendation engine
+
 - Best accuracy-efficiency trade-off
 - Scalable untuk production environment
 - Good serendipity dan discovery capabilities
 
 **Secondary Model**: **Content-Based** untuk specific scenarios
+
 - New item recommendations
 - Explainable recommendations untuk user trust
 - Fallback untuk cold start situations
 
 **Hybrid Strategy**: Combine both approaches dengan weighted ensemble
+
 - 70% SVD + 30% Content-Based untuk balanced recommendations
 - Dynamic weighting berdasarkan user profile completeness
 - A/B testing untuk optimal weight determination
@@ -633,12 +685,14 @@ Paired t-test menunjukkan perbedaan performa antara SVD dan KNN secara statistik
 ### Limitations dan Future Improvements
 
 #### Current Limitations
+
 1. **Evaluation Coverage**: Limited offline metrics, need online A/B testing
-2. **Temporal Dynamics**: Models tidak consider temporal changes dalam preferences  
+2. **Temporal Dynamics**: Models tidak consider temporal changes dalam preferences
 3. **Context Awareness**: Tidak incorporate contextual information (time, location, device)
 4. **Fairness**: Belum evaluate untuk algorithmic bias
 
 #### Future Enhancements
+
 1. **Deep Learning**: Implement neural collaborative filtering
 2. **Multi-Armed Bandits**: Online learning dengan exploration-exploitation
 3. **Context-Aware**: Incorporate temporal dan contextual signals
@@ -655,7 +709,7 @@ Proyek sistem rekomendasi film ini berhasil mengimplementasikan dan mengevaluasi
 ### Key Achievements
 
 1. **Model Development**: Successfully implemented 3 different recommendation models
-2. **Performance**: Achieved RMSE 0.8734 with SVD model (19.4% error rate)
+2. **Performance**: Achieved RMSE 0.8807 with SVD model (19.4% error rate)
 3. **Scalability**: Developed production-ready solution dengan efficient inference
 4. **Business Value**: Created explainable dan diverse recommendations
 
@@ -669,6 +723,7 @@ Proyek sistem rekomendasi film ini berhasil mengimplementasikan dan mengevaluasi
 ### Business Impact
 
 Sistem rekomendasi yang dikembangkan memiliki potensi untuk:
+
 - Meningkatkan user engagement hingga 23%
 - Meningkatkan discovery rate untuk long-tail items sebesar 34%
 - Meningkatkan user satisfaction berdasarkan prediction accuracy
