@@ -92,9 +92,9 @@ Dataset yang digunakan dalam proyek ini adalah **MovieLens Latest Small Dataset*
 #### 1. movies.csv
 | Variabel | Deskripsi | Tipe Data |
 |----------|-----------|-----------|
-| movieId | ID unik untuk setiap film | Integer |
-| title | Judul film beserta tahun rilis | String |
-| genres | Genre film (dipisahkan dengan "|") | String |
+| movieId | ID unik untuk setiap film | int64 |
+| title | Judul film beserta tahun rilis | object |
+| genres | Genre film (dipisahkan dengan " ") | object |
 
 **Contoh**: 
 ```
@@ -106,18 +106,18 @@ genres: Adventure|Animation|Children|Comedy|Fantasy
 #### 2. ratings.csv
 | Variabel | Deskripsi | Tipe Data |
 |----------|-----------|-----------|
-| userId | ID unik untuk setiap pengguna | Integer |
-| movieId | ID film yang dirating | Integer |
-| rating | Rating yang diberikan (0.5-5.0) | Float |
-| timestamp | Waktu pemberian rating (Unix timestamp) | Integer |
+| userId | ID unik untuk setiap pengguna | int64 |
+| movieId | ID film yang dirating | int64 |
+| rating | Rating yang diberikan (0.5-5.0) | float64 |
+| timestamp | Waktu pemberian rating (Unix timestamp) | int64 |
 
 #### 3. tags.csv
 | Variabel | Deskripsi | Tipe Data |
 |----------|-----------|-----------|
-| userId | ID pengguna yang memberikan tag | Integer |
-| movieId | ID film yang diberi tag | Integer |
-| tag | Tag/label yang diberikan | String |
-| timestamp | Waktu pemberian tag | Integer |
+| userId | ID pengguna yang memberikan tag | int64 |
+| movieId | ID film yang diberi tag | int64 |
+| tag | Tag/label yang diberikan | object |
+| timestamp | Waktu pemberian tag | int64 |
 
 ### Exploratory Data Analysis (EDA)
 
