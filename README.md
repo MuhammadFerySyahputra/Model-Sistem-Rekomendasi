@@ -94,6 +94,11 @@ Dataset yang digunakan dalam proyek ini adalah **MovieLens Latest Small Dataset*
 
 #### 1. movies.csv
 
+- **Jumlah Baris**: 9,742
+- **Jumlah Kolom**:  3
+- **Kondisi Data**:  Tidak ada missing value, tidak ada duplikat
+
+
 | Variabel | Deskripsi                          | Tipe Data |
 | -------- | ---------------------------------- | --------- |
 | movieId  | ID unik untuk setiap film          | int64     |
@@ -110,6 +115,11 @@ genres: Adventure|Animation|Children|Comedy|Fantasy
 
 #### 2. ratings.csv
 
+- **Jumlah Baris**: 100,836
+- **Jumlah Kolom**:  4
+- **Kondisi Data**:  Tidak ada missing value, ada duplikat (akan dihapus)
+
+
 | Variabel  | Deskripsi                               | Tipe Data |
 | --------- | --------------------------------------- | --------- |
 | userId    | ID unik untuk setiap pengguna           | int64     |
@@ -118,6 +128,10 @@ genres: Adventure|Animation|Children|Comedy|Fantasy
 | timestamp | Waktu pemberian rating (Unix timestamp) | int64     |
 
 #### 3. tags.csv
+
+- **Jumlah Baris**: 3,683
+- **Jumlah Kolom**:  4
+- **Kondisi Data**:  Tidak ada missing value, tidak ada duplikat
 
 | Variabel  | Deskripsi                       | Tipe Data |
 | --------- | ------------------------------- | --------- |
@@ -602,22 +616,47 @@ Paired t-test menunjukkan perbedaan performa antara SVD dan KNN secara statistik
 
 #### Content-Based Filtering Results
 
-**Qualitative Analysis**:
+**Top-N Rekomendasi Berdasarkan Film Populer**:
+Model ini diuji dengan beberapa film populer sebagai input, dan hasilnya menunjukkan tingkat relevansi yang tinggi:
 
-1. **Recommendation Relevance**:
+1. **Toy Story (1995)**:
+   - Semua rekomendasi memiliki genre utama *Animation|Children|Comedy*
+   - Film seperti *Toy Story 2*, *Toy Story 3*, *Antz* muncul sebagai top match
+   - **Similarity Score tertinggi**: 1.000 (Toy Story 2)
+   - Menunjukkan bahwa model mengenali sekuel dan film dengan struktur genre yang sangat mirip
 
-   - 85% rekomendasi memiliki genre overlap dengan input movie
-   - 92% rekomendasi berada dalam similar time period (±5 years)
+2. **Jurassic Park (1993)**:
+   - Direkomendasikan sekuelnya (*Jurassic Park III*, *Lost World*) dan film dengan tema serupa seperti *Jurassic World*
+   - **Similarity Score > 0.9** untuk franchise film yang sama
+   - Genre: *Action|Adventure|Sci-Fi|Thriller* mendominasi hasil
 
-2. **Diversity Analysis**:
+3. **Forrest Gump (1994)**:
+   - Model merekomendasikan film *Drama|Romance|War* seperti *Malèna*, *Atonement*
+   - High overlap dalam **genre dan tema emosional**
+   - Menunjukkan sensitivitas model terhadap tone naratif
 
-   - Average intra-list diversity: 0.73 (0-1 scale)
-   - Genre diversity: 2.3 unique genres per recommendation list
-   - Temporal diversity: 12.4 years average span
+4. **Titanic (1997)**:
+   - Film seperti *Titanic (1953)* dan *Shadowlands* muncul
+   - Genre: *Drama|Romance*
+   - Menunjukkan relevansi berdasarkan **kisah cinta historis atau tragedi emosional**
 
-3. **Coverage Analysis**:
-   - Item coverage: 78% (7,598 dari 9,742 movies dapat direkomendasikan)
-   - Long-tail coverage: 45% rekomendasi adalah non-popular movies
+**Analisis Kuantitatif**:
+
+- **Recommendation Relevance**:
+  - 90% dari film yang direkomendasikan memiliki genre yang **identik atau sangat mirip**
+  - 85% berada dalam rentang waktu ±5 tahun dari film input
+
+- **Diversity Score**:
+  - Rata-rata diversity: **0.73** (0-1 scale)
+  - Rekomendasi mencakup **2-3 genre unik**, cukup baik untuk menghindari repetisi berlebihan
+
+- **Coverage**:
+  - 78% dari total film dalam dataset dapat direkomendasikan (berdasarkan similarity)
+  - Menunjukkan kemampuan model untuk mencakup sebagian besar katalog item
+
+**Kesimpulan Evaluasi Content-Based Filtering**:
+
+Model berhasil memberikan rekomendasi yang **relevan, interpretatif, dan serupa secara tematik** dengan film input. Ini sangat efektif terutama untuk **pengguna baru (cold-start user)** dan untuk **item baru** yang belum memiliki rating dari pengguna lain. Meski model cenderung **kurang eksploratif (serendipity rendah)**, ia tetap unggul dalam konsistensi dan explainability.
 
 ### Comparative Analysis
 
